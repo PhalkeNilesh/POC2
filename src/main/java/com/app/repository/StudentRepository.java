@@ -8,5 +8,5 @@ import com.app.model.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-	public List<Student>findByName(String firstName);
+	//public List<Student>findByName(String firstName);
 }

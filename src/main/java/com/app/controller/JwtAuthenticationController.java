@@ -20,7 +20,6 @@ import com.app.model.JwtRequest;
 import com.app.model.JwtResponse;
 import com.app.service.JwtUserDetailsService;
 
-
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
@@ -34,45 +33,26 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 
-	//@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	@PostMapping("/authenticate")
-	//@PostMapping("/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-		
-		System.out.println("JWT Request  "+authenticationRequest);
-		
-		
+
+		System.out.println("JWT Request  " + authenticationRequest);
+
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
-			
-		}catch(UsernameNotFoundException e) {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+					authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+
+		} catch (UsernameNotFoundException e) {
 			e.printStackTrace();
 			throw new Exception("Bad Creadantials");
-			
+
 		}
-		
+
 		UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		String token = jwtTokenUtil.generateToken(userDetails);
-		System.out.println("Token is = "+token);
+		System.out.println("Token is = " + token);
 		return ResponseEntity.ok(new JwtResponse(token));
-//		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-//
-//		final UserDetails userDetails = userDetailsService
-//				.loadUserByUsername(authenticationRequest.getUsername());
-//
-//		final String token = jwtTokenUtil.generateToken(userDetails);
-//		System.out.println("Token is = "+token);
-//
-//		return ResponseEntity.ok(new JwtResponse(token));
+
 	}
 
-//	private void authenticate(String username, String password) throws Exception {
-//		try {
-//			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-//		} catch (DisabledException e) {
-//			throw new Exception("USER_DISABLED", e);
-//		} catch (BadCredentialsException e) {
-//			throw new Exception("INVALID_CREDENTIALS", e);
-//		}
-//	}
 }

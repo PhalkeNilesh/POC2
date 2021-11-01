@@ -16,23 +16,23 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Entity
-@Table(name="projects")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Project {
 	
 	@Id
+	@NonNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String projectName;
 	private int duration;
 	
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinTable(	name = "student_projects", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "projects_id"))
-//	private Set<Project> project = new HashSet<>();
+
 	
 
 }

@@ -10,7 +10,7 @@ import com.app.model.Project;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer>{
 	
-	//Optional<Project> findByName(String proName);
+	
 	
 	public Project findById(int id);
 	
